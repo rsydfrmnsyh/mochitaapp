@@ -50,12 +50,14 @@ class ProductsController extends Controller
             'product_name' => 'required',
             'product_price' => 'required|integer',
             'product_stock' => 'required|integer',
-            ]);
-            Products::create($validateData);
-            return redirect('/products/'.$products->id)->with('message',"$products->product_name berhasil diupdate");
+        ]);
+            
+        $products->update($validateData);
+        return redirect('/products/'.$products->id)->with('message',"$products->product_name berhasil diupdate");
     }
 
     public function destroy($id)
+
     {
         $products = Products::findOrFail($id);
         $products->delete();
